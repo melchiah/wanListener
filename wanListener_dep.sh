@@ -64,6 +64,7 @@ intervalWanIpCheck(){
 		if [ "$WANIP" != "$(tail -n 1 $LOG_DIR | cut -d ',' -f 1)" ]
 		then
 			sendMail	
+			#echo "TEST: sent mail"
 		fi
 		
 		if [ -f $LOG_DIR ]

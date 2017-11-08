@@ -5,9 +5,10 @@
 # If there is change in wan ip address program will send an e-amil
 # in order to inform administartor about the change occured.
 
-source /home/pi/.my_scripts/wanListener/wanListener_dep.sh
+readonly DIR="/home/pi/.my_scripts/wanListener"
+readonly LOG_DIR="$DIR/wanip_log.csv"
 
-readonly LOG_DIR="$(pwd)/wanip_log.csv"
+source $DIR/wanListener_dep.sh
 
 readonly MINUTES=60
 readonly HOURS=$(( $MINUTES * $MINUTES ))
