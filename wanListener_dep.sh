@@ -24,7 +24,7 @@ sendMail(){
 	local LOG="WAN ip-address currently is $WANIP from home"
 
 
-	echo "$LOG" | $SNDM screwchihobb@gmail.com || {
+	echo "$LOG" | $SNDM $EMAIL || {
 		echo 'Please use sudo with script'; exit 1;
 	}
 
