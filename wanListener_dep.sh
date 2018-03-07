@@ -2,6 +2,7 @@
 
 wanIpCases(){
 	local -a SITES=(
+	       #"checkip.dynu.com"
 		"ifconfig.co"
 		"ipecho.net/plain"
 		"icanhazip.com"
@@ -21,12 +22,17 @@ wanIpCases(){
 
 sendMail(){
 	local SNDM=$(which sendmail)
-	local LOG="WAN ip-address currently is $WANIP from home"
+	local LOG="WAN ip-address currently is $WANIP from Franklyn"
 
 
-	echo "$LOG" | $SNDM screwchihobb@gmail.com || {
+	echo "$LOG" | $SNDM $E_MAIL || {
 		echo 'Please use sudo with script'; exit 1;
 	}
+
+}
+
+dynuIPUpdate(){
+	echo "dnyuIPUpdate"
 
 }
 
@@ -48,12 +54,26 @@ limitLogFile(){
 	fi
 }
 
+timingLogic(){
+		if [[ $SECS -eq 0 ]]; then
+			echo "Will sleep $(( $MINUTES * 2)) seconds"
+			sleep $(( $MINUTES * 2 ))
+		elif [[ $SECS -gt 0 ]]; then
+			echo "Will sleep $SECS seconds"
+			sleep $SECS
+		elif [ "$SECS" == '' ]; then
+			echo "Unkown parameter..."
+			echo "Will sleep $(( $MINUTES * 2)) seconds - default"
+			sleep $(( $MINUTES * 2 ))
+		fi
+}
+
 intervalWanIpCheck(){
 	while [ 1 ]
 	do
 		wanIpCases
-
 		limitLogFile
+		timingLogic
 
 		local DATE=$(date)
 		local DATA_ROW=$"$WANIP, $DATE"
@@ -63,7 +83,8 @@ intervalWanIpCheck(){
 
 		if [ "$WANIP" != "$(tail -n 1 $LOG_DIR | cut -d ',' -f 1)" ]
 		then
-			sendMail	
+			sendMail
+			dynuIPUpdate	
 			#echo "TEST: sent mail"
 		fi
 		
@@ -71,7 +92,6 @@ intervalWanIpCheck(){
 		then
 			echo "$DATA_ROW" | tee -a $LOG_DIR
 		fi
-		
-		sleep $HOURS
+
 	done
 }

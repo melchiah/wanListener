@@ -10,9 +10,13 @@ readonly LOG_DIR="$DIR/wanip_log.csv"
 
 source $DIR/wanListener_dep.sh
 
+readonly E_MAIL=$1
+readonly DYNU_USER=$2
+readonly DYNU_PASS=$3
+readonly SECS=$4
+
 readonly MINUTES=60
 readonly HOURS=$(( $MINUTES * $MINUTES ))
-
 
 # Set listener to continuosly check for WAN address and see if changes occured.
 intervalWanIpCheck
