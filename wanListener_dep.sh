@@ -24,12 +24,7 @@ sendMail(){
 	local SNDM=$(which sendmail)
 	local LOG="WAN ip-address currently is $WANIP from Franklyn"
 
-
-<<<<<<< HEAD
 	echo "$LOG" | $SNDM $E_MAIL || {
-=======
-	echo "$LOG" | $SNDM $EMAIL || {
->>>>>>> 04b2cc331cb4a745fca90b751097c835540f209b
 		echo 'Please use sudo with script'; exit 1;
 	}
 

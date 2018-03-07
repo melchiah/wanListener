@@ -10,15 +10,9 @@ readonly LOG_DIR="$DIR/wanip_log.csv"
 
 source $DIR/wanListener_dep.sh
 
-<<<<<<< HEAD
 readonly E_MAIL=$1
-readonly DYNU_USER=$2
-readonly DYNU_PASS=$3
-readonly SECS=$4
+readonly SECS=$2
 
-=======
-readonly EMAIL=$1
->>>>>>> 04b2cc331cb4a745fca90b751097c835540f209b
 readonly MINUTES=60
 readonly HOURS=$(( $MINUTES * $MINUTES ))
 
